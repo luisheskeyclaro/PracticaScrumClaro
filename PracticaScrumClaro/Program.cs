@@ -36,7 +36,7 @@ public static class Program
 	static void createTeam()
 	{
 		TeamBLL teamBLL = new TeamBLL();
-		teamBLL.CreateScrumTeam(user);
+		teamBLL.CreateScrumTeam(User);
 
     }
 
