@@ -17,7 +17,7 @@ namespace PracticaScrumClaro.DataManager
 		{
 			string baseDirectory = AppDomain.CurrentDomain.BaseDirectory + "\\Data\\" + fileName;
 
-			if (File.Exists(fileName))
+			if (File.Exists(baseDirectory))
 			{
 				string json = File.ReadAllText(baseDirectory);
 				var d = JsonConvert.DeserializeObject<T>(json);
