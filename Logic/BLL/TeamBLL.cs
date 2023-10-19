@@ -13,11 +13,11 @@ namespace Logic.BLL
 	public class TeamBLL
 	{
 
-		/* private bool IsValidCreatorRole(User user)
-        {
-            // Validar si el creador tiene el rol de "ProductOwner" o "ScrumMaster"
-            return user. == Role.ProductOwner || creatorRole == Role.ScrumMaster;
-        }*/
+		private bool IsValidCreatorRole(User user)
+		{
+			return user.Role == Role.ProductOwner || user.Role == Role.ScrumMaster;
+		}
+
 
 		public ResponseData CreateScrumTeam(User user)
 		{
