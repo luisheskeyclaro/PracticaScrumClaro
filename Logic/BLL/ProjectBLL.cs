@@ -1,17 +1,21 @@
 ﻿using Logic.Models;
 using Logic.Utilities;
 using PracticaScrumClaro.Models;
+using System;
+using System.Collections.Generic;
 
 namespace Logic.BLL
 {
 	public class ProjectBLL
 	{
-		public static ResponseData Save(string nombre, string descripcion, string empresa, DateTime fechaInicio, string equipo)
+		public static ResponseData Save(string nombre, string descripcion, string empresa, DateTime fechaInicio = DateTime.Now, string equipo = "")
 		{
 			try
 			{
 				Proyect data = ValidateFields(nombre, descripcion, empresa, fechaInicio, equipo);
-				Logic.DataManager.DataManager.SaveData<Proyect>(data, "Proyectos.txt");
+				List<Proyect> proyects = Logic.DataManager.DataManager.GetData<List<Proyect>>("Proyectos.txt");
+				proyects.Add(data);
+				Logic.DataManager.DataManager.SaveData<Proyect>(proyects, "Proyectos.txt");
 				return new ResponseData { IsSuccess = true, Message = "Guardado Correctamente." };
 
 			}
