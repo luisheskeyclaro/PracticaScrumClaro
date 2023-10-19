@@ -8,14 +8,14 @@ namespace Logic.BLL
 {
 	public class ProjectBLL
 	{
-		public static ResponseData Save(string nombre, string descripcion, string empresa, DateTime fechaInicio = DateTime.Now, string equipo = "")
+		public static ResponseData Save(string nombre, string descripcion, string empresa, DateTime fechaInicio, string equipo = "")
 		{
 			try
 			{
 				Proyect data = ValidateFields(nombre, descripcion, empresa, fechaInicio, equipo);
 				List<Proyect> proyects = Logic.DataManager.DataManager.GetData<List<Proyect>>("Proyectos.txt");
 				proyects.Add(data);
-				Logic.DataManager.DataManager.SaveData<Proyect>(proyects, "Proyectos.txt");
+				Logic.DataManager.DataManager.SaveData(proyects, "Proyectos.txt");
 				return new ResponseData { IsSuccess = true, Message = "Guardado Correctamente." };
 
 			}

@@ -47,8 +47,8 @@ public static class Program
 				{
 					case 1:
 						var responseCreateProject = CreateProject();
-                        Utilities.ResponseManager(responseCreateProject);
-                        break;
+						Utilities.ResponseManager(responseCreateProject);
+						break;
 					case 2:
 						//  ViewProjects();
 						break;
@@ -78,12 +78,12 @@ public static class Program
 		string name = Console.ReadLine();
 		Console.WriteLine("Digite una descripcion para el proyecto");
 		string description = Console.ReadLine();
-        Console.WriteLine("Digite la compañia del proyecto");
-        string company = Console.ReadLine();
-        Console.WriteLine("Digite el nombre del equipo para el proyecto");
-        string teamname = Console.ReadLine();
+		Console.WriteLine("Digite la compañia del proyecto");
+		string company = Console.ReadLine();
+		Console.WriteLine("Digite el nombre del equipo para el proyecto");
+		string teamname = Console.ReadLine();
 
-		return ProjectBLL.Save(name, description, company, teamname);
-    }
+		return ProjectBLL.Save(name, description, company, DateTime.Now, teamname);
+	}
 }
 
