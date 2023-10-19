@@ -13,31 +13,53 @@ namespace Logic.BLL
 {
     public class TeamBLL
     {
-        public ResponseData Save(Team data, Role creatorRole)
+       
+        /* private bool IsValidCreatorRole(User user)
         {
-            try
+            // Validar si el creador tiene el rol de "ProductOwner" o "ScrumMaster"
+            return user. == Role.ProductOwner || creatorRole == Role.ScrumMaster;
+        }*/
+
+        public ResponseData CreateScrumTeam(User user)
+        {
+
+           /* if (!IsValidCreatorRole(user))
             {
-                if (IsValidCreatorRole(creatorRole))
+                DataManager.SaveData<Team>(data, "Team.txt");
+                return new ResponseData { IsSuccess = false, Message = "No tienes permiso para crear un equipo." };
+            }*/
+
+
+        Console.Write("Enter Team Name: ");
+            string teamName = Console.ReadLine();
+            Team scrumTeam = new Team(teamName);
+
+            while (true)
+            {
+                Console.Write("Enter Member Name (or type 'done' to finish): ");
+                string name = Console.ReadLine();
+
+                if (name.ToLower() == "done")
                 {
-                    DataManager.SaveData<Team>(data, "Team.txt");
-                    return new ResponseData { IsSuccess = true, Message = "Guardado Correctamente." };
+                    break;
+                }
+
+                Console.Write("Enter Member Role (Developer, ProductOwner, ScrumMaster, QA, Designer, etc): ");
+                if (Enum.TryParse<Role>(Console.ReadLine(), out Role role))
+                {
+                    Member member = new Member(name, role);
+                    scrumTeam.AddMember(member);
                 }
                 else
                 {
-                    return new ResponseData { IsSuccess = false, Message = "No tienes permiso para crear un equipo." };
+                    Console.WriteLine("Invalid role. Please enter a valid role.");
                 }
             }
-            catch (Exception ex)
-            {
-                return new ResponseData { IsSuccess = false, Message = ex.Message };
-            }
+            DataManager.SaveData<Team>(scrumTeam, "Team.txt");
+            return new ResponseData { IsSuccess = true, Message = "Guardado Correctamente." };
+           
         }
 
-        private bool IsValidCreatorRole(Role creatorRole)
-        {
-            // Validar si el creador tiene el rol de "ProductOwner" o "ScrumMaster"
-            return creatorRole == Role.ProductOwner || creatorRole == Role.ScrumMaster;
-        }
 
     }
 }

@@ -29,7 +29,8 @@ public static class Program
             Console.WriteLine("Scrum Team Management Console App\n");
             Console.WriteLine("1. Create Project");
             Console.WriteLine("2. View Projects");
-            Console.WriteLine("3. Exit");
+            Console.WriteLine("3. Crear Team");
+            Console.WriteLine("0. Exit");
 
             Console.Write("Select an option: ");
 
@@ -44,6 +45,9 @@ public static class Program
                       //  ViewProjects();
                         break;
                     case 3:
+                       // exit = true;
+                        break;
+                    case 0:
                         exit = true;
                         break;
                     default:
