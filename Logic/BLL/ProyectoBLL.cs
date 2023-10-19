@@ -6,7 +6,7 @@ namespace Logic.BLL
 {
 	public class ProyectoBLL
 	{
-		public ResponseData Save(Proyecto data)
+		public static ResponseData Save(Proyecto data)
 		{
 			try
 			{
