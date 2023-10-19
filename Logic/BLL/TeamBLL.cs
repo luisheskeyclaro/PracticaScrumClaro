@@ -13,21 +13,20 @@ namespace Logic.BLL
 {
     public class TeamBLL
     {
-       
-        /* private bool IsValidCreatorRole(User user)
+
+        private bool IsValidCreatorRole(User user)
         {
-            // Validar si el creador tiene el rol de "ProductOwner" o "ScrumMaster"
-            return user. == Role.ProductOwner || creatorRole == Role.ScrumMaster;
-        }*/
+            return user.Role == Role.ProductOwner || user.Role == Role.ScrumMaster;
+        }
+
 
         public ResponseData CreateScrumTeam(User user)
         {
 
-           /* if (!IsValidCreatorRole(user))
+            if (!IsValidCreatorRole(user))
             {
-                DataManager.SaveData<Team>(data, "Team.txt");
                 return new ResponseData { IsSuccess = false, Message = "No tienes permiso para crear un equipo." };
-            }*/
+            }
 
 
         Console.Write("Enter Team Name: ");
