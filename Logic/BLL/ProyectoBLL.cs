@@ -1,5 +1,4 @@
 ﻿using Logic.Models;
-using PracticaScrumClaro.DataManager;
 using PracticaScrumClaro.Models;
 
 namespace Logic.BLL
@@ -10,7 +9,7 @@ namespace Logic.BLL
 		{
 			try
 			{
-				DataManager.SaveData<Proyecto>(data, "Proyectos.txt");
+				Logic.DataManager.DataManager.SaveData<Proyecto>(data, "Proyectos.txt");
 				return new ResponseData { IsSuccess = true, Message = "Guardado Correctamente." };
 
 			}

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace PracticaScrumClaro.DataManager
+namespace Logic.DataManager
 {
 	public class DataManager
 	{
@@ -8,7 +8,6 @@ namespace PracticaScrumClaro.DataManager
 		public static void SaveData<T>(T data, string fileName)
 		{
 			string baseDirectory = AppDomain.CurrentDomain.BaseDirectory + "\\Data\\" + fileName;
-
 			string json = JsonConvert.SerializeObject(data);
 			File.WriteAllText(baseDirectory, json);
 		}
