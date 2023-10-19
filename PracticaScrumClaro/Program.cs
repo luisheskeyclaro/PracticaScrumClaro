@@ -6,6 +6,8 @@ using System.Runtime.CompilerServices;
 public static class Program
 {
 	private static Logic.BLL.LoginBLL loginBLL { get; set; } = new Logic.BLL.LoginBLL();
+
+
 	static void Main(string[] args)
 	{
 		//Colocamos el Login
@@ -13,7 +15,8 @@ public static class Program
 		users.Add(new User { Name = "luis", Pass = "12345678", FailPassCount = 0, Role = Role.Developer });
 		Logic.DataManager.DataManager.SaveData(users, "Users.txt");
 		var response = loginBLL.Authenticate(new Logic.Models.Login { Name = "luis", Pass = "12345678" });
-		if (response.IsSuccess)
+
+        if (response.IsSuccess)
 		{
 			showMenu();
 		}
@@ -60,8 +63,8 @@ public static class Program
 						//  ViewProjects();
 						break;
 					case 3:
-						// exit = true;
-						break;
+						createTeam();
+                        break;
 					case 0:
 						Environment.Exit(0);
 						break;
