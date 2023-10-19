@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Logic.Models
 {
+
     public class Member
     {
         public string Name { get; set; }
-        public string Role { get; set; }
+        public Role Role { get; set; }
 
-        public Member(string name, string role)
+        public Member(string name, Role role)
         {
             Name = name;
             Role = role;
