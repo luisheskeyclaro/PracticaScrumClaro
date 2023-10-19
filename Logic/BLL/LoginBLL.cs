@@ -1,5 +1,4 @@
 ﻿using Logic.Models;
-using PracticaScrumClaro.DataManager;
 
 namespace Logic.BLL
 {
@@ -9,12 +8,12 @@ namespace Logic.BLL
 		public ResponseData Authenticate(Login login)
 		{
 			Console.ForegroundColor = ConsoleColor.Green;
-			var data = DataManager.GetData<List<User>>("Users.txt");
+			var data = Logic.DataManager.DataManager.GetData<List<User>>("Users.txt");
 			IEnumerable<User> users = new List<User>();
 			User user = new User();
 			try
 			{
-				if (login.Pass.Length != 8) return new ResponseData { IsSuccess = false, Message = "Cantidad de caracteres de contraseña invalidos." };
+				if (login.Pass.Length < 5) return new ResponseData { IsSuccess = false, Message = "Cantidad de caracteres de contraseña invalidos." };
 				users = data.Where(m => m.Name == login.Name);
 				if (users.Count() <= 0) return new ResponseData { IsSuccess = false, Message = "El usuario no existe." };
 				user = users.FirstOrDefault();
@@ -29,7 +28,7 @@ namespace Logic.BLL
 							item.FailPassCount = 0;
 						}
 					}
-					DataManager.SaveData(data, "Users.txt");
+					Logic.DataManager.DataManager.SaveData(data, "Users.txt");
 					return new ResponseData { IsSuccess = true, Message = "Logueado Correctamente.", Data = user };
 				};
 				//Contraseña invalida.
@@ -41,7 +40,7 @@ namespace Logic.BLL
 						item.FailPassCount++;
 					}
 				}
-				DataManager.SaveData(data, "Users.txt");
+				Logic.DataManager.DataManager.SaveData(data, "Users.txt");
 				return new ResponseData { IsSuccess = false, Message = "Contraseña invalida." };
 			}
 			catch (Exception ex)
