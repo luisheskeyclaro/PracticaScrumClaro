@@ -12,10 +12,10 @@ namespace Logic.BLL
 		{
 			try
 			{
-				Proyect data = ValidateFields(nombre, descripcion, empresa, fechaInicio, equipo);
-				List<Proyect> proyects = Logic.DataManager.DataManager.GetData<List<Proyect>>("Proyectos.txt");
+				Project data = ValidateFields(nombre, descripcion, empresa, fechaInicio, equipo);
+				List<Project> proyects = Logic.DataManager.DataManager.GetData<List<Project>>("Proyectos.txt");
 				proyects.Add(data);
-				Logic.DataManager.DataManager.SaveData(proyects, "Proyectos.txt");
+				Logic.DataManager.DataManager.SaveData<List<Project>>(proyects, "Proyectos.txt");
 				return new ResponseData { IsSuccess = true, Message = "Guardado Correctamente." };
 
 			}
@@ -24,7 +24,7 @@ namespace Logic.BLL
 				return new ResponseData { IsSuccess = false, Message = ex.Message };
 			}
 		}
-		private static Proyect ValidateFields(string nombre, string descripcion, string empresa, DateTime fechaInicio, string equipo)
+		private static Project ValidateFields(string nombre, string descripcion, string empresa, DateTime fechaInicio, string equipo)
 		{
 			if (String.IsNullOrEmpty(nombre) || String.IsNullOrEmpty(descripcion) || String.IsNullOrEmpty(empresa))
 			{
@@ -37,7 +37,7 @@ namespace Logic.BLL
 				if (validar.FirstOrDefault() == null)
 					throw new NullReferenceException("Equipo no existe");
 			}
-			return new Proyect { Name = nombre, Description = descripcion, Company = empresa, InitialDate = fechaInicio };
+			return new Project { Name = nombre, Description = descripcion, Company = empresa, InitialDate = fechaInicio };
 		}
 	}
 

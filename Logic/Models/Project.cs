@@ -1,6 +1,6 @@
 ﻿namespace PracticaScrumClaro.Models
 {
-	public class Proyect
+	public class Project
 	{
 		public string Name { get; set; }
 		public string TeamName { get; set; }

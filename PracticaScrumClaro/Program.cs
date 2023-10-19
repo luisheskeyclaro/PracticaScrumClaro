@@ -5,9 +5,11 @@ using System.Runtime.CompilerServices;
 
 public static class Program
 {
+	private static User User { get; set; }
 	private static Logic.BLL.LoginBLL loginBLL { get; set; } = new Logic.BLL.LoginBLL();
 	static void Main(string[] args)
 	{
+		Console.ResetColor();
 		//Colocamos el Login
 		List<User> users = new List<User>();
 		users.Add(new User { Name = "luis", Pass = "12345678", FailPassCount = 0, Role = Role.Developer });
@@ -15,6 +17,8 @@ public static class Program
 		var response = loginBLL.Authenticate(new Logic.Models.Login { Name = "luis", Pass = "12345678" });
 		if (response.IsSuccess)
 		{
+			var user = (User)response.Data;
+			User = user;
 			showMenu();
 		}
 		else
@@ -34,6 +38,9 @@ public static class Program
 		{
 			Console.Clear();
 			Console.WriteLine("Scrum Team Management Console App\n");
+			Console.ForegroundColor = ConsoleColor.Yellow;
+			Console.WriteLine($"Hello {User.Name} welcome to Claro. \n");
+			Console.ResetColor();
 			Console.WriteLine("1. Create Project");
 			Console.WriteLine("2. View Projects");
 			Console.WriteLine("3. Crear Team");
@@ -73,6 +80,7 @@ public static class Program
 	static ResponseData CreateProject()
 	{
 		Console.Clear();
+		Console.ResetColor();
 		Console.WriteLine("Crear Proyecto");
 		Console.WriteLine("Digite el nombre del proyecto");
 		string name = Console.ReadLine();
