@@ -1,5 +1,4 @@
 ﻿using Logic.Models;
-using PracticaScrumClaro.DataManager;
 using PracticaScrumClaro.Models;
 
 namespace Logic.BLL
