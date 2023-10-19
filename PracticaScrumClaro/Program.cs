@@ -36,10 +36,10 @@ public static class Program
                 switch (choice)
                 {
                     case 1:
-                        CreateProject();
+                       // CreateProject();
                         break;
                     case 2:
-                        ViewProjects();
+                      //  ViewProjects();
                         break;
                     case 3:
                         exit = true;

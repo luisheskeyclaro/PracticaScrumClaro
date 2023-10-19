@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Logic.BLL
 {
-    internal class MemberBLL
+    public class MemberBLL
     {
     }
 }
