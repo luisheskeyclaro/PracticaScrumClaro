@@ -8,7 +8,7 @@ public sealed class ProyectoBLL_Facts
 	[TestCase("Proyecto1.txt")]
 	public void SaveData_WithFileNotCreated(string fileName)
 	{
-		Proyect testProject = new Proyect
+		Project testProject = new Project
 		{
 			Name = "Proyecto1",
 			TeamName = "Eq01",

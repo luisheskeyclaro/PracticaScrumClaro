@@ -20,11 +20,15 @@ namespace Logic.DataManager
 			{
 				string json = File.ReadAllText(baseDirectory);
 				var d = JsonConvert.DeserializeObject<T>(json);
+				if (d == null)
+				{
+					throw new Exception("Data not found");
+				}
 				return d;
 			}
 			else
 			{
-				throw new FileNotFoundException("El archivo no existe.");
+				throw new FileNotFoundException("File not found.");
 			}
 		}
 	}
