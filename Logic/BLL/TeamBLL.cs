@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System;
+using System.Diagnostics.Metrics;
 
 
 namespace Logic.BLL
@@ -19,13 +20,18 @@ namespace Logic.BLL
             return user.Role == Role.ProductOwner || user.Role == Role.ScrumMaster;
         }
 
+        private int CountDevelopers(Team team)
+        {
+            return team.Members.Count(member => member.Role == Role.Developer);
+        }
+
 
         public ResponseData CreateScrumTeam(User user)
         {
 
             if (!IsValidCreatorRole(user))
             {
-                return new ResponseData { IsSuccess = false, Message = "No tienes permiso para crear un equipo." };
+                return new ResponseData { IsSuccess = false, Message = "You do not have permission to create a team." };
             }
 
 
@@ -43,11 +49,24 @@ namespace Logic.BLL
                     break;
                 }
 
+                
+
                 Console.Write("Enter Member Role (Developer, ProductOwner, ScrumMaster, QA, Designer, etc): ");
                 if (Enum.TryParse<Role>(Console.ReadLine(), out Role role))
                 {
+                    
                     Member member = new Member(name, role);
-                    scrumTeam.AddMember(member);
+
+                    if (member.Role == Role.Developer && CountDevelopers(scrumTeam) > 7)
+                    {
+                        Console.Write("No more than 7 Developers are allowed. ");
+                        continue;
+                    }else
+                    {
+                        scrumTeam.AddMember(member);
+                    }
+
+                   
                 }
                 else
                 {
@@ -55,7 +74,7 @@ namespace Logic.BLL
                 }
             }
             DataManager.SaveData<Team>(scrumTeam, "Team.txt");
-            return new ResponseData { IsSuccess = true, Message = "Guardado Correctamente." };
+            return new ResponseData { IsSuccess = true, Message = "Saved Successfully." };
            
         }
 
