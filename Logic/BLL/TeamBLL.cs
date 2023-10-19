@@ -2,7 +2,9 @@
 using PracticaScrumClaro.Models;
 using System;
 using System;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,15 +20,18 @@ namespace Logic.BLL
 			return user.Role == Role.ProductOwner || user.Role == Role.ScrumMaster;
 		}
 
+		private int CountDevelopers(Team team)
+		{
+			return team.Members.Count(member => member.Role == Role.Developer);
+		}
 
 		public ResponseData CreateScrumTeam(User user)
 		{
 
-			/* if (!IsValidCreatorRole(user))
-			 {
-				 DataManager.SaveData<Team>(data, "Team.txt");
-				 return new ResponseData { IsSuccess = false, Message = "No tienes permiso para crear un equipo." };
-			 }*/
+			if (!IsValidCreatorRole(user))
+			{
+				return new ResponseData { IsSuccess = false, Message = "No tienes permiso para crear un equipo." };
+			}
 
 
 			Console.Write("Enter Team Name: ");
@@ -54,7 +59,7 @@ namespace Logic.BLL
 					Console.WriteLine("Invalid role. Please enter a valid role.");
 				}
 			}
-			Logic.DataManager.DataManager.SaveData<Team>(scrumTeam, "Team.txt");
+			DataManager.SaveData<Team>(scrumTeam, "Team.txt");
 			return new ResponseData { IsSuccess = true, Message = "Guardado Correctamente." };
 
 		}
