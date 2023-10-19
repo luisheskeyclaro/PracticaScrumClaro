@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace PracticaScrumClaro.DataManager
+namespace Logic.DataManager
 {
 	public class DataManager
 	{
